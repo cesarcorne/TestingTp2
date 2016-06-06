@@ -4,6 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.io.Serializable;
 
+import korat.examples.singlylinkedlist.SerializableObject;
+import korat.finitization.IFinitization;
+import korat.finitization.IIntSet;
+import korat.finitization.IObjSet;
+import korat.finitization.impl.FinitizationFactory;
+
 
 /**
  * Class  SinglyLinkedList defines Singly linked List
@@ -92,9 +98,6 @@ public class SinglyLinkedList implements Serializable{
 	}
 
 
-
-	
-
 	public String toString() {
 		String res = "(";
 		if (header != null) {
@@ -106,5 +109,6 @@ public class SinglyLinkedList implements Serializable{
 		}
 		return res + ")";
 	}
+	
 
 }//End Class

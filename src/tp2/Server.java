@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import korat.finitization.IClassDomain;
 import korat.finitization.IFinitization;
@@ -144,13 +145,72 @@ public class Server implements Serializable {
 		
 	}
 	
-	
 	public boolean repOK(){
-		// TODO: Completar este metodo
-		return false;
+		//check SinglyLinkedList repOk
+		if	(exceptions.header == null) return false;
+		if (exceptions.header.element != null) return false;
+		Set<Entry> visited = new HashSet<Entry>();
+		Set<IP> visitedIp = new HashSet<IP>();
+		visited.add(exceptions.header);
+		Entry current = exceptions.header.next;
+		while (true){
+			if (current == null)
+				break;
+			if (!visited.add(current))
+				return false;
+			if (current.element == null) return false;
+			if	(!visitedIp.add(current.element))
+				return false;
+			current = current.next;
+		}
+		if (visited.size()-1 != exceptions.size){
+			return false;
+		}
+		if (bans.header == null) return false;
+		if (bans.header.element != null) return false;
+		Set<Node> visitedBans = new HashSet<Node>();
+		Set<IP> visitedIpBans = new HashSet<IP>();
+		visitedBans.add(bans.header);
+		Node currentBan = bans.header.next;
+		while (true){
+			if (currentBan == null)
+				break;
+			if (!visitedBans.add(currentBan))
+				return false;
+			if (currentBan.element == null) return false;
+			if	(!visitedIpBans.add(currentBan.element.ip))
+				return false;
+			currentBan = currentBan.next;
+		}
+		if (visitedBans.size()-1 != bans.size){
+			return false;
+		}
+		
+		Node currentOrderedBan = bans.header.next;
+		while (true){
+			if(currentOrderedBan == null) break;
+			if (currentOrderedBan.next == null)
+				break;
+			if (currentOrderedBan.element.expires >= currentOrderedBan.next.element.expires)
+				return false;
+			currentOrderedBan = currentOrderedBan.next;
+		}
+		Node currentTimeBan = bans.header.next;
+		while (true){
+			if (currentTimeBan == null)
+				break;
+			if (currentTimeBan.element.expires < this.lastUpdate)
+				return false;
+			currentTimeBan = currentTimeBan.next;
+		}
+		
+		for (IP ip1:visitedIp)
+			for (IP ip2:visitedIpBans)
+				if (ip1.equals(ip2)) return false;
+		if(this.time.getCurrentTime()<this.lastUpdate)return false;
+		return true;
+		
 	}
-	
-	
 	
 	private static List<IP> fixedIPList() {
 		ArrayList<IP> res = new ArrayList<IP>(20);

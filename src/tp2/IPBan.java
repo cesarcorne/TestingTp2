@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class IPBan implements Serializable {
 
+
 	public static final long serialVersionUID = 1;
 	/**
 	 * The banned ip

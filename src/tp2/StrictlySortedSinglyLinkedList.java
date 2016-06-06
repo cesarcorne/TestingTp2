@@ -34,7 +34,6 @@ public class StrictlySortedSinglyLinkedList implements Serializable{
     			current = current.next;
        	} 
     	return false;
-    	
     }
     
     /**
@@ -50,7 +49,6 @@ public class StrictlySortedSinglyLinkedList implements Serializable{
     			current = current.next;
        	} 
     	return false;
-    	
     }
     
     /**
