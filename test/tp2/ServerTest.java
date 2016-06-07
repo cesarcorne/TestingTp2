@@ -45,6 +45,7 @@ public class ServerTest {
 				Server server = (Server) ois.readObject();
 				result.add(server);
 			}
+			ois.close();
 		} catch (FileNotFoundException f) {
 			f.printStackTrace();
 		} catch (IOException io) {
