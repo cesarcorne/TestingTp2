@@ -137,12 +137,14 @@ public class Server implements Serializable {
 	public void update() {
 
 		lastUpdate = time.getCurrentTime();
+	
 		
 		IPBan b;
+		
 		while(bans.getSize()>0 && (b=bans.get(0)).getExpires().compareTo(lastUpdate) <= 0){
 			bans.removeFromIP(b.ip);
 		}
-		
+
 	}
 	
 	public boolean repOK(){
@@ -178,6 +180,7 @@ public class Server implements Serializable {
 			if (!visitedBans.add(currentBan))
 				return false;
 			if (currentBan.element == null) return false;
+			if (currentBan.element.ip == null) return false;
 			if	(!visitedIpBans.add(currentBan.element.ip))
 				return false;
 			currentBan = currentBan.next;
@@ -199,7 +202,7 @@ public class Server implements Serializable {
 		while (true){
 			if (currentTimeBan == null)
 				break;
-			if (currentTimeBan.element.expires < this.lastUpdate)
+			if (currentTimeBan.element.expires <= this.lastUpdate)
 				return false;
 			currentTimeBan = currentTimeBan.next;
 		}

@@ -1,5 +1,6 @@
 package tp2;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -12,11 +13,17 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.experimental.theories.PotentialAssignment;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 
+import tp2.SSServerGen;
+import tp2.Server;
 
+@RunWith(Theories.class)
 public class ServerTest {
 	
-	
+	/*
 	@Test
 	public void test() {
 		List<Server> list = deserialize();
@@ -32,13 +39,14 @@ public class ServerTest {
 	 * 
 	 * @return La lista de objetos generados por Korat
 	 * */
+	/*
 	private List<Server> deserialize(){
 		List<Server> result = new ArrayList<Server>();
 		FileInputStream fis;
 		ObjectInputStream ois;
 		try {
 			// Leemos el archivo serializado generado por Korat
-			File f = new File("/home/cristian/workspace/TestingTp2/objects.ser");
+			File f = new File("/home/cesar/Escritorio/testing/korat/tp2.ser");
 			fis = new FileInputStream(f);
 			ois = new ObjectInputStream(fis);
 			for (int i = 0; i < fis.available(); i++) {
@@ -55,6 +63,18 @@ public class ServerTest {
 		}
 
 		return result;
+	}
+	*/
+	
+	@Theory
+	public void test2(@SSServerGen Server s){
+
+		
+		//System.out.println(s.toString());
+		
+		s.update(); 
+		assertThat(s.repOK(),is(true));
+	 
 	}
 
 }

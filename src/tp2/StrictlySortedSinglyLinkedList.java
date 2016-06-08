@@ -63,6 +63,7 @@ public class StrictlySortedSinglyLinkedList implements Serializable{
     			if(current.element.getIp().equals(value)){
     				//remove ip
     				prev.next = current.next;
+    				this.size--;
     				break;
     			}
     			current = current.next;
