@@ -58,6 +58,7 @@ public class Server implements Serializable {
 		this.exceptions = new SinglyLinkedList();
 		this.bans = new StrictlySortedSinglyLinkedList();
 		this.time = new RealTime();
+		this.lastUpdate= new Long(0);
 	}
 	
 	/**
@@ -267,7 +268,7 @@ public class Server implements Serializable {
 	}	
 	
 	
-	
+																																																					
 	public static IFinitization finServer(int maxSizeLists) {
 
 		IFinitization f = FinitizationFactory.create(Server.class);
@@ -279,8 +280,8 @@ public class Server implements Serializable {
 		IObjSet entries = f.createObjSet(Entry.class, true);
 		entries.addClassDomain(f.createClassDomain(Entry.class, maxSizeLists+1));
 		IIntSet sizes = f.createIntSet(0, maxSizeLists);
-
-			
+		
+					
 		IObjSet bansLists = f.createObjSet(StrictlySortedSinglyLinkedList.class, false);
 		bansLists.addClassDomain(f.createClassDomain(StrictlySortedSinglyLinkedList.class, 1));
 
@@ -334,7 +335,6 @@ public class Server implements Serializable {
 		
 		return f;
 	}
-
 
 	@Override
 	public String toString() {

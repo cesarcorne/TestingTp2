@@ -1,0 +1,2 @@
+cons : tp2.IP.<init>(java.lang.Integer, java.lang.Integer, java.lang.Integer, java.lang.Integer), tp2.IPBan.<init>(tp2.IP, java.lang.Long), tp2.StrictlySortedSinglyLinkedList(), tp2.SinglyLinkedList()
+method : tp2.Server.repOK(), tp2.Server.update(), addBan(tp2.IP), removeBan(tp2.IP), removeException(tp2.IP), addException(tp2.IP), connect(tp2.IP), fixedIPList(), setTime()

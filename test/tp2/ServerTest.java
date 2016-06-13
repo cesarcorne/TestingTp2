@@ -65,6 +65,14 @@ public class ServerTest {
 		return result;
 	}
 	*/
+	@Test
+	public void test(){
+		Server s;
+		s = new Server();
+		System.out.print(s.toString());
+		assertTrue(s.repOK());
+	}
+	
 	
 	@Theory
 	public void test2(@SSServerGen Server s){
